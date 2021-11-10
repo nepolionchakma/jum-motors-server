@@ -42,6 +42,7 @@ async function run() {
         // Post Api
         app.post("/products", async (req, res) => {
             const product = req.body;
+            console.log("hit the api", product);
             const result = await productsCollection.insertOne(product);
             res.json(result)
         })
