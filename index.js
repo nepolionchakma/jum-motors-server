@@ -21,7 +21,7 @@ async function run() {
     try {
         await client.connect();
         // console.log("database successfully connected")
-        const database = client.db("JUM_MOTORS");
+        const database = client.db("JUM-MOTORS");
         const productsCollection = database.collection("products");
 
         // get Products
@@ -57,6 +57,7 @@ async function run() {
         // await client.close();
     }
 }
+run().catch(console.dir);
 
 app.get("/", (req, res) => {
     res.send("Running JUM MOTORS Server")
