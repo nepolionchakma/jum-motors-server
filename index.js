@@ -23,6 +23,7 @@ async function run() {
         const database = client.db("JUM-MOTORS");
         const productsCollection = database.collection("products");
         const userCollection = database.collection("users");
+        const orderCollection = database.collection("orders");
         // get Products
         app.get("/products", async (req, res) => {
             const cursor = productsCollection.find({});
@@ -41,7 +42,7 @@ async function run() {
         // Post Api
         app.post("/products", async (req, res) => {
             const product = req.body;
-            console.log("hit the api", product);
+            // console.log("hit the api", product);
             const result = await productsCollection.insertOne(product);
             res.json(result)
         })
@@ -86,6 +87,13 @@ async function run() {
             const filter = { email: user.email };
             const updateDoc = { $set: { role: "admin" } };
             const result = await userCollection.updateOne(filter, updateDoc);
+            res.json(result)
+        })
+
+        // Orders
+        app.post("/orders", async (req, res) => {
+            const order = req.body;
+            const result = await orderCollection.insertOne(order);
             res.json(result)
         })
 
