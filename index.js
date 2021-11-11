@@ -61,7 +61,7 @@ async function run() {
         })
 
         // google user
-        app.put("/user", async (req, res) => {
+        app.put("/users", async (req, res) => {
             const user = req.body;
             const filter = { email: user.email };
             const options = { upsert: true };
