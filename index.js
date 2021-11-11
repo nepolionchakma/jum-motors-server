@@ -22,7 +22,7 @@ async function run() {
         // console.log("database successfully connected")
         const database = client.db("JUM-MOTORS");
         const productsCollection = database.collection("products");
-
+        const userCollection = database.collection("users");
         // get Products
         app.get("/products", async (req, res) => {
             const cursor = productsCollection.find({});
@@ -52,6 +52,14 @@ async function run() {
             const result = await productsCollection.deleteOne(query);
             res.json(result)
         })
+
+        // users
+        app.post("/users", async (req, res) => {
+            const user = req.body;
+            const result = await userCollection.insertOne(user)
+            res.json(result);
+        })
+
     }
     finally {
         // await client.close();
