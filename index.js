@@ -91,13 +91,11 @@ async function run() {
             res.json(result)
         })
 
-        // Orders
+        // Customer mail check
         app.get("/users", async (req, res) => {
-            const email = req.query.email;
-            const query = { email: email };
-            const cursor = userCollection.find(query);
-            const orderItems = await cursor.toArray();
-            res.json(orderItems);
+            const cursor = userCollection.find({});
+            const usersData = await cursor.toArray();
+            res.json(usersData);
         })
         // reviews add
         app.post("/reviews", async (req, res) => {
