@@ -112,9 +112,25 @@ async function run() {
             res.json(result)
         })
 
-
+        // get Reviews
         app.get("/reviews", async (req, res) => {
             const cursor = reviewCollection.find({});
+            const reviews = await cursor.toArray();
+            res.send(reviews)
+        })
+
+        // Put Order
+        app.put("/orders", async (req, res) => {
+            const user = req.body;
+            const filter = { email: user.email };
+            const options = { upsert: true };
+            const updateDoc = { $set: user };
+            const result = await orderCollection.updateOne(filter, updateDoc, options);
+            res.json(result)
+        })
+        // get Order
+        app.get("/orders", async (req, res) => {
+            const cursor = orderCollection.find({});
             const reviews = await cursor.toArray();
             res.send(reviews)
         })
