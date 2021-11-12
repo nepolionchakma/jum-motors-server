@@ -91,18 +91,28 @@ async function run() {
             res.json(result)
         })
 
-        // Customer mail check
+        // User  check
         app.get("/users", async (req, res) => {
             const cursor = userCollection.find({});
             const usersData = await cursor.toArray();
             res.json(usersData);
         })
+        // User delete data
+        app.delete("/users/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await userCollection.deleteOne(query);
+            res.json(result)
+        })
+
         // reviews add
         app.post("/reviews", async (req, res) => {
             const review = req.body;
             const result = await reviewCollection.insertOne(review);
             res.json(result)
         })
+
+
         app.get("/reviews", async (req, res) => {
             const cursor = reviewCollection.find({});
             const reviews = await cursor.toArray();
