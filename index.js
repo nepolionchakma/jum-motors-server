@@ -91,10 +91,12 @@ async function run() {
         })
 
         // Orders
-        app.post("/orders", async (req, res) => {
-            const user = req.body;
-            const result = await userCollection.insertOne(user)
-            res.json(result);
+        app.get("/users", async (req, res) => {
+            const email = req.query.email;
+            const query = { email: email };
+            const cursor = userCollection.find(query);
+            const orderItems = await cursor.toArray();
+            res.json(orderItems);
         })
 
     }
