@@ -142,6 +142,7 @@ async function run() {
             const result = await cursor.toArray();
             res.send(result)
         })
+
         // order delete data
         // app.delete("/orders", async (req, res) => {
         //     const id = req.params.email;
