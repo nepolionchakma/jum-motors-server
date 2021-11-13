@@ -128,20 +128,22 @@ async function run() {
             const result = await orderCollection.updateOne(filter, updateDoc, options);
             res.json(result)
         })
-        // get single Order
+        // get all & single Order
         app.get("/orders", async (req, res) => {
             const email = req.query.email;
             const query = { email: email };
             const cursor = orderCollection.find(query);
+            const cursor2 = orderCollection.find({});
             const result = await cursor.toArray();
-            res.json(result)
+            const result2 = await cursor2.toArray();
+            res.json(result, result2)
         })
         // get  Order
-        app.get("/orders", async (req, res) => {
-            const cursor = orderCollection.find({});
-            const result = await cursor.toArray();
-            res.send(result)
-        })
+        // app.get("/orders", async (req, res) => {
+        //     const cursor = orderCollection.find({});
+        //     const result = await cursor.toArray();
+        //     res.send(result)
+        // })
 
         // order delete data
         // app.delete("/orders", async (req, res) => {
