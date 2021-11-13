@@ -143,6 +143,13 @@ async function run() {
             res.json(result)
         })
         // order delete data
+        app.delete("/orders", async (req, res) => {
+            const id = req.params.email;
+            const query = { email: email };
+            const result = await orderCollection.deleteOne(query);
+            res.json(result)
+        })
+        // order delete data
         app.delete("/orders/:id", async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
