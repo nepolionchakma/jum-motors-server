@@ -128,6 +128,15 @@ async function run() {
             const result = await orderCollection.updateOne(filter, updateDoc, options);
             res.json(result)
         })
+
+        // get all Order
+        app.get("/orders", async (req, res) => {
+            const cursor = orderCollection.find({});
+            const result = await cursor.toArray();
+            res.send(result)
+        })
+
+
         // get single Order
         // app.get("/orders", async (req, res) => {
         //     const email = req.query.email;
@@ -136,12 +145,8 @@ async function run() {
         //     const result = await cursor.toArray();
         //     res.json(result)
         // })
-        // get all Order
-        app.get("/orders", async (req, res) => {
-            const cursor = orderCollection.find({});
-            const result = await cursor.toArray();
-            res.send(result)
-        })
+
+
 
         // order delete data
         // app.delete("/orders", async (req, res) => {
@@ -150,6 +155,8 @@ async function run() {
         //     const result = await orderCollection.deleteOne(query);
         //     res.json(result)
         // })
+
+
         // order delete data
         app.delete("/orders/:id", async (req, res) => {
             const id = req.params.id;
